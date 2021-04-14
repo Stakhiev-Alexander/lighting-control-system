@@ -6,10 +6,21 @@ from resources.led_control import LedControl
 
 
 class LedApi(Resource):
+    def get(self):
+        print('led get')
+        pass
+
+
+    def put(self):
+        print('led put')
+        pass
+
+
     def post(self):
         token = request.args.get('token')
         pin = int(request.args.get('pin'))
         value = int(request.args.get('value'))
+        print(f'Request from {token}')
 
         if token is None or pin is None or value is None:
             return '', 404
@@ -18,6 +29,6 @@ class LedApi(Resource):
         if not result:
             return '', 404
 
-        LedControl().setPinValue(pin=pin, value=value)
+        LedControl().set_pin_value(pin=pin, value=value)
 
         return '', 200
